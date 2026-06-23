@@ -57,9 +57,10 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px clamp(18px, 4vw, 48px);
+  min-height: 40px;
+  padding: 10px clamp(18px, 4vw, 48px);
   border-bottom: 1px solid rgba(29, 36, 38, 0.12);
-  background: rgba(243, 241, 236, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
 }
 
@@ -81,7 +82,7 @@ nav a,
 }
 
 .brand-button img {
-  width: clamp(150px, 18vw, 220px);
+  width: clamp(120px, 14vw, 170px);
   height: auto;
 }
 
@@ -93,7 +94,7 @@ nav {
 
 nav a,
 .nav-button {
-  min-height: 40px;
+  min-height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +128,7 @@ nav a.active,
 }
 
 .cart-menu-button {
-  min-height: 40px;
+  min-height: 34px;
   border: 0;
   border-radius: 8px;
   padding: 0 12px;
@@ -141,7 +142,7 @@ nav a.active,
 }
 
 .user-menu-button {
-  min-height: 40px;
+  min-height: 34px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -252,11 +253,11 @@ nav a.active,
 
 .cart-drawer {
   position: fixed;
-  top: 84px;
+  top: 64px;
   right: 18px;
   z-index: 50;
   width: min(420px, calc(100vw - 36px));
-  max-height: calc(100vh - 102px);
+  max-height: calc(100vh - 82px);
   display: grid;
   grid-template-rows: auto auto auto auto;
   gap: 16px;
@@ -1280,10 +1281,10 @@ dd {
   }
 
   .cart-drawer {
-    top: 132px;
+    top: 118px;
     right: 14px;
     width: calc(100vw - 28px);
-    max-height: calc(100vh - 146px);
+    max-height: calc(100vh - 132px);
   }
 
   .mini-cart-list {
