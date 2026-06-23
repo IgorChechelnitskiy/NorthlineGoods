@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { useCart } from '../cart/CartContext';
+import { Button } from '../components/Button';
 import { getProduct, Product } from '../lib/api';
 import { formatPrice } from '../lib/format';
 
@@ -88,12 +89,9 @@ export function ProductDetailsPage() {
                 </button>
               </div>
             </label>
-            <button
-              className="primary-button wide-button"
-              onClick={() => addToCart(product.id, quantity)}
-            >
+            <Button fullWidth onClick={() => addToCart(product.id, quantity)}>
               Add {quantity} to cart
-            </button>
+            </Button>
           </div>
         )}
       </section>

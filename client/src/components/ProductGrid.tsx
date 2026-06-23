@@ -3,10 +3,22 @@ import { useAuth } from '../auth/AuthContext';
 import { useCart } from '../cart/CartContext';
 import { Product } from '../lib/api';
 import { formatPrice } from '../lib/format';
+import { Button } from './Button';
 
-export function ProductGrid({ products }: { products: Product[] }) {
+type ProductGridProps = {
+  onDeleteProduct?: (productId: string) => void;
+  onEditProduct?: (product: Product) => void;
+  products: Product[];
+};
+
+export function ProductGrid({
+  onDeleteProduct,
+  onEditProduct,
+  products,
+}: ProductGridProps) {
   const { role } = useAuth();
   const { addToCart } = useCart();
+  const canManageProducts = role === 'admin' && onEditProduct;
 
   return (
     <div className="product-grid">
@@ -25,12 +37,27 @@ export function ProductGrid({ products }: { products: Product[] }) {
             <div className="card-actions">
               <Link to={`/products/${product.id}`}>Details</Link>
               {(role === 'user' || role === 'admin') && (
-                <button
-                  className="primary-button"
-                  onClick={() => addToCart(product.id)}
-                >
+                <Button onClick={() => addToCart(product.id)}>
                   Add
-                </button>
+                </Button>
+              )}
+              {canManageProducts && (
+                <Button
+                  onClick={() => onEditProduct(product)}
+                  type="button"
+                  variant="secondary"
+                >
+                  Edit
+                </Button>
+              )}
+              {role === 'admin' && onDeleteProduct && (
+                <Button
+                  onClick={() => onDeleteProduct(product.id)}
+                  type="button"
+                  variant="danger"
+                >
+                  Delete
+                </Button>
               )}
             </div>
           </div>

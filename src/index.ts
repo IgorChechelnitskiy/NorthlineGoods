@@ -31,12 +31,6 @@ app.get('/api/health', (_request, response) => {
   });
 });
 
-app.get('/api/message', (_request, response) => {
-  response.json({
-    message: 'Hello from Express and TypeScript.',
-  });
-});
-
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);

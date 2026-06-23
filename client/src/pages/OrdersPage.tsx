@@ -8,6 +8,9 @@ import {
   updateOrderStatus,
 } from '../lib/api';
 import { formatPrice } from '../lib/format';
+import { Button } from '../components/Button';
+import { FormField } from '../components/FormField';
+import { FormMessage } from '../components/FormMessage';
 
 const orderStatuses: OrderStatus[] = ['created', 'paid', 'cancelled'];
 
@@ -83,7 +86,7 @@ export function OrdersPage() {
       ) : isLoading ? (
         <p className="muted-copy">Loading orders...</p>
       ) : error ? (
-        <p className="form-message error-message">{error}</p>
+        <FormMessage variant="error">{error}</FormMessage>
       ) : orders.length === 0 ? (
         <p className="muted-copy">No orders have been placed yet.</p>
       ) : (
@@ -134,8 +137,7 @@ export function OrdersPage() {
 
               {role === 'admin' && (
                 <div className="order-admin-actions">
-                  <label>
-                    Status
+                  <FormField label="Status">
                     <select
                       value={order.status}
                       onChange={(event) =>
@@ -148,14 +150,14 @@ export function OrdersPage() {
                         </option>
                       ))}
                     </select>
-                  </label>
-                  <button
-                    className="danger-button"
+                  </FormField>
+                  <Button
                     onClick={() => removeOrder(order.id)}
                     type="button"
+                    variant="danger"
                   >
                     Delete order
-                  </button>
+                  </Button>
                 </div>
               )}
             </article>
