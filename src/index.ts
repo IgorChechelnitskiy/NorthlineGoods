@@ -25,7 +25,7 @@ app.use(authenticate);
 app.get('/api/health', (_request, response) => {
   response.json({
     ok: true,
-    service: 'sandbox-api',
+    service: 'northlinegoods-api',
     database: getDatabaseStatus(),
     timestamp: new Date().toISOString(),
   });
