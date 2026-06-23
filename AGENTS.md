@@ -8,6 +8,7 @@ Use this file for rules that apply across the whole NorthlineGoods project.
 - Prefer existing project patterns before adding new abstractions.
 - Do not commit secrets, local `.env` files, build output, logs, IDE folders, or dependencies.
 - Use TypeScript types deliberately; avoid `any` unless there is a clear reason.
+- Create reusable components for UI patterns that appear more than twice across the project, such as buttons, cards, form fields, or repeated panels.
 
 ## Verification
 
