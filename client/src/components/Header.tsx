@@ -66,11 +66,6 @@ export function Header() {
         <NavLink onClick={closeMenus} to="/products">
           Products
         </NavLink>
-        {role === 'admin' && (
-          <NavLink onClick={closeMenus} to="/admin">
-            Admin
-          </NavLink>
-        )}
         {(role === 'user' || role === 'admin') && (
           <NavLink onClick={closeMenus} to="/orders">
             Orders

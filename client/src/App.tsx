@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
 import { CartProvider } from './cart/CartContext';
 import { Header } from './components/Header';
-import { AdminPage } from './pages/AdminPage';
 import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { HomePage } from './pages/HomePage';
@@ -20,7 +19,6 @@ export function App() {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/admin" element={<AdminPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/products" element={<ProductsPage />} />
