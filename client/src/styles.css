@@ -80,6 +80,11 @@ nav a,
   font-weight: 800;
 }
 
+.brand-button img {
+  width: clamp(150px, 18vw, 220px);
+  height: auto;
+}
+
 nav {
   display: flex;
   align-items: center;

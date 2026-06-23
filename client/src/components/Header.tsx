@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../auth/AuthContext';
 import { useCart } from '../cart/CartContext';
+import northlineLogo from '../assets/northline-logo.png';
 import { formatPrice } from '../lib/format';
 
 export function Header() {
@@ -32,7 +33,7 @@ export function Header() {
   return (
     <header className="site-header">
       <NavLink className="brand-button" to="/">
-        Northline Goods
+        <img src={northlineLogo} alt="Northline Goods" />
       </NavLink>
       <nav aria-label="Primary navigation">
         <NavLink to="/">Main</NavLink>
