@@ -9,6 +9,7 @@ export function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, logoutUser, role, user } = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {
     cartCount,
     cartItems,
@@ -22,12 +23,20 @@ export function Header() {
   async function handleLogout() {
     await logoutUser();
     setIsUserMenuOpen(false);
+    setIsMobileMenuOpen(false);
     navigate('/');
   }
 
   function goToCheckout() {
     closeCartMenu();
+    setIsMobileMenuOpen(false);
     navigate('/checkout');
+  }
+
+  function closeMenus() {
+    setIsMobileMenuOpen(false);
+    setIsUserMenuOpen(false);
+    closeCartMenu();
   }
 
   return (
@@ -35,12 +44,36 @@ export function Header() {
       <NavLink className="brand-button" to="/">
         <img src={northlineLogo} alt="Northline Goods" />
       </NavLink>
-      <nav aria-label="Primary navigation">
-        <NavLink to="/">Main</NavLink>
-        <NavLink to="/products">Products</NavLink>
-        {role === 'admin' && <NavLink to="/admin">Admin</NavLink>}
+      <button
+        aria-expanded={isMobileMenuOpen}
+        aria-label="Toggle navigation menu"
+        className="hamburger-button"
+        onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+        type="button"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+      <nav
+        aria-label="Primary navigation"
+        className={isMobileMenuOpen ? 'nav-menu open' : 'nav-menu'}
+      >
+        <NavLink onClick={closeMenus} to="/">
+          Main
+        </NavLink>
+        <NavLink onClick={closeMenus} to="/products">
+          Products
+        </NavLink>
+        {role === 'admin' && (
+          <NavLink onClick={closeMenus} to="/admin">
+            Admin
+          </NavLink>
+        )}
         {(role === 'user' || role === 'admin') && (
-          <NavLink to="/orders">Orders</NavLink>
+          <NavLink onClick={closeMenus} to="/orders">
+            Orders
+          </NavLink>
         )}
         {(role === 'user' || role === 'admin') && (
           <div className="cart-menu-wrap">
@@ -129,7 +162,7 @@ export function Header() {
                       <button
                         className="secondary-button"
                         onClick={() => {
-                          closeCartMenu();
+                          closeMenus();
                           navigate('/cart');
                         }}
                         type="button"
@@ -175,7 +208,7 @@ export function Header() {
                   <p>{user.email}</p>
                   <span>{user.role}</span>
                 </div>
-                <Link onClick={() => setIsUserMenuOpen(false)} to="/settings">
+                <Link onClick={closeMenus} to="/settings">
                   Configuration
                 </Link>
                 <button onClick={handleLogout} type="button">
@@ -185,7 +218,9 @@ export function Header() {
             )}
           </div>
         ) : (
-          <NavLink to="/login">Login</NavLink>
+          <NavLink onClick={closeMenus} to="/login">
+            Login
+          </NavLink>
         )}
       </nav>
     </header>
