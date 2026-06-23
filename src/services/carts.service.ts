@@ -1,5 +1,6 @@
 import { Types } from 'mongoose';
 import { HttpError } from '../errors/httpError';
+import { assertObjectId } from '../utils/objectId';
 import { CartModel } from '../models/Cart';
 import { ProductDocument, ProductModel } from '../models/Product';
 
@@ -165,12 +166,6 @@ export async function deleteCart(cartId: string) {
 
 export function calculateShipping(subtotal: number) {
   return subtotal > 0 && subtotal < 150 ? 12 : 0;
-}
-
-function assertObjectId(value: string, name: string) {
-  if (!Types.ObjectId.isValid(value)) {
-    throw new HttpError(400, `Invalid ${name}`);
-  }
 }
 
 function assertPositiveQuantity(quantity: number) {

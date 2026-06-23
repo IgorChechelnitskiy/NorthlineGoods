@@ -1,5 +1,6 @@
 import { ProductDocument, ProductModel } from '../models/Product';
 import { seedProducts } from '../data/seedProducts';
+import { assertObjectId } from '../utils/objectId';
 
 export type CreateProductInput = ProductDocument;
 
@@ -8,6 +9,7 @@ export async function getProducts() {
 }
 
 export async function getProductById(productId: string) {
+  assertObjectId(productId, 'productId');
   return ProductModel.findById(productId);
 }
 
@@ -19,6 +21,7 @@ export async function updateProduct(
   productId: string,
   input: Partial<CreateProductInput>,
 ) {
+  assertObjectId(productId, 'productId');
   return ProductModel.findByIdAndUpdate(productId, input, {
     new: true,
     runValidators: true,
@@ -26,6 +29,7 @@ export async function updateProduct(
 }
 
 export async function deleteProduct(productId: string) {
+  assertObjectId(productId, 'productId');
   return ProductModel.findByIdAndDelete(productId);
 }
 

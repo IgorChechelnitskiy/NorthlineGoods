@@ -3,6 +3,7 @@ import { OrderCustomerDocument, OrderDocument, OrderModel } from '../models/Orde
 import { CartModel } from '../models/Cart';
 import { CartSummary, deleteCart, getCartById } from './carts.service';
 import { UserRole } from '../models/User';
+import { assertObjectId } from '../utils/objectId';
 
 export type CheckoutInput = {
   userId: string;
@@ -39,6 +40,8 @@ export async function getOrderById(
   userId: string,
   role: UserRole,
 ) {
+  assertObjectId(orderId, 'orderId');
+
   const order = await OrderModel.findById(orderId).populate(
     'user',
     'name email role',
@@ -59,6 +62,8 @@ export async function updateOrderStatus(
   orderId: string,
   status: OrderDocument['status'],
 ) {
+  assertObjectId(orderId, 'orderId');
+
   if (!['created', 'paid', 'cancelled'].includes(status)) {
     throw new HttpError(400, 'Invalid order status');
   }
@@ -71,6 +76,7 @@ export async function updateOrderStatus(
 }
 
 export async function deleteOrder(orderId: string) {
+  assertObjectId(orderId, 'orderId');
   return OrderModel.findByIdAndDelete(orderId);
 }
 
