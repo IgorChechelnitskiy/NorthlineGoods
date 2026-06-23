@@ -67,9 +67,17 @@ export function ProductsPage() {
 
     try {
       await deleteProduct(productId);
+      const deletedEditingProduct = editingProduct?.id === productId;
+
       setProducts((currentProducts) =>
         currentProducts.filter((product) => product.id !== productId),
       );
+
+      if (deletedEditingProduct) {
+        setEditingProduct(null);
+        setIsFormOpen(false);
+      }
+
       setMessage('Product deleted');
     } catch (deleteError) {
       setError(
