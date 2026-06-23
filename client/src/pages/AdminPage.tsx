@@ -9,6 +9,10 @@ import {
   updateProduct,
 } from '../lib/api';
 import { formatPrice } from '../lib/format';
+import { Button } from '../components/Button';
+import { FormField } from '../components/FormField';
+import { FormMessage } from '../components/FormMessage';
+import { Panel } from '../components/Panel';
 
 const initialForm = {
   name: '',
@@ -150,28 +154,25 @@ export function AdminPage() {
 
       <section>
         <form className="admin-product-form" onSubmit={submitProduct}>
-          <label>
-            Name
+          <FormField label="Name">
             <input
               required
               value={form.name}
               onChange={(event) => updateField('name', event.target.value)}
               placeholder="Linen Field Jacket"
             />
-          </label>
+          </FormField>
 
-          <label>
-            Category
+          <FormField label="Category">
             <input
               required
               value={form.category}
               onChange={(event) => updateField('category', event.target.value)}
               placeholder="Outerwear"
             />
-          </label>
+          </FormField>
 
-          <label>
-            Price
+          <FormField label="Price">
             <input
               required
               min="0"
@@ -181,10 +182,9 @@ export function AdminPage() {
               onChange={(event) => updateField('price', event.target.value)}
               placeholder="128"
             />
-          </label>
+          </FormField>
 
-          <label>
-            Rating
+          <FormField label="Rating">
             <input
               required
               max="5"
@@ -195,20 +195,18 @@ export function AdminPage() {
               onChange={(event) => updateField('rating', event.target.value)}
               placeholder="4.8"
             />
-          </label>
+          </FormField>
 
-          <label>
-            Color
+          <FormField label="Color">
             <input
               required
               value={form.color}
               onChange={(event) => updateField('color', event.target.value)}
               placeholder="Sage"
             />
-          </label>
+          </FormField>
 
-          <label>
-            Image URL
+          <FormField label="Image URL">
             <input
               required
               type="url"
@@ -216,45 +214,36 @@ export function AdminPage() {
               onChange={(event) => updateField('image', event.target.value)}
               placeholder="https://example.com/product.jpg"
             />
-          </label>
+          </FormField>
 
-          <label className="full-width-field">
-            Description
+          <FormField fullWidth label="Description">
             <textarea
               required
               value={form.description}
               onChange={(event) => updateField('description', event.target.value)}
               placeholder="Short product description"
             />
-          </label>
+          </FormField>
 
-          {error && <p className="form-message error-message">{error}</p>}
+          {error && <FormMessage variant="error">{error}</FormMessage>}
 
-          <button
-            className="primary-button wide-button"
-            disabled={isSubmitting}
-            type="submit"
-          >
+          <Button disabled={isSubmitting} fullWidth type="submit">
             {isSubmitting
               ? 'Saving...'
               : selectedProduct
                 ? 'Save product'
                 : 'Add product'}
-          </button>
+          </Button>
 
           {selectedProduct && (
-            <button
-              className="secondary-button wide-button"
-              onClick={startCreate}
-              type="button"
-            >
+            <Button fullWidth onClick={startCreate} type="button" variant="secondary">
               Add new product
-            </button>
+            </Button>
           )}
         </form>
       </section>
 
-      <aside className="admin-preview">
+      <Panel className="admin-preview">
         <h2>{savedProduct ? 'Saved product' : 'Products'}</h2>
         {savedProduct && (
           <article className="product-card admin-created-card">
@@ -288,21 +277,21 @@ export function AdminPage() {
                 <strong>{formatPrice(product.price)}</strong>
               </div>
               <div className="admin-row-actions">
-                <button onClick={() => startEdit(product)} type="button">
+                <Button onClick={() => startEdit(product)} type="button" variant="secondary">
                   Edit
-                </button>
-                <button
-                  className="danger-button"
+                </Button>
+                <Button
                   onClick={() => removeProduct(product.id)}
                   type="button"
+                  variant="danger"
                 >
                   Delete
-                </button>
+                </Button>
               </div>
             </article>
           ))}
         </div>
-      </aside>
+      </Panel>
     </main>
   );
 }

@@ -2,7 +2,9 @@ import { FormEvent } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { useCart } from '../cart/CartContext';
+import { Button } from '../components/Button';
 import { EmptyState } from '../components/EmptyState';
+import { FormField } from '../components/FormField';
 import { OrderSummary } from '../components/OrderSummary';
 
 export function CheckoutPage() {
@@ -42,25 +44,21 @@ export function CheckoutPage() {
           <EmptyState />
         ) : (
           <form className="checkout-form" onSubmit={submitCheckout}>
-            <label>
-              Full name
+            <FormField label="Full name">
               <input required name="name" placeholder="Alex Morgan" />
-            </label>
-            <label>
-              Email
+            </FormField>
+            <FormField label="Email">
               <input required type="email" name="email" placeholder="alex@example.com" />
-            </label>
-            <label>
-              Address
+            </FormField>
+            <FormField label="Address">
               <input required name="address" placeholder="42 Market Street" />
-            </label>
-            <label>
-              City
+            </FormField>
+            <FormField label="City">
               <input required name="city" placeholder="Portland" />
-            </label>
-            <button className="primary-button wide-button" type="submit">
+            </FormField>
+            <Button fullWidth type="submit">
               Place order
-            </button>
+            </Button>
           </form>
         )}
       </section>

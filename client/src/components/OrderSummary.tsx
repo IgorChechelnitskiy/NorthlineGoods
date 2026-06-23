@@ -1,4 +1,6 @@
 import { formatPrice } from '../lib/format';
+import { Button } from './Button';
+import { Panel } from './Panel';
 
 type OrderSummaryProps = {
   subtotal: number;
@@ -16,7 +18,7 @@ export function OrderSummary({
   onCheckout,
 }: OrderSummaryProps) {
   return (
-    <aside className="summary-panel">
+    <Panel className="summary-panel">
       <h2>Order summary</h2>
       <div>
         <span>Subtotal</span>
@@ -31,14 +33,10 @@ export function OrderSummary({
         <strong>{formatPrice(total)}</strong>
       </div>
       {onCheckout && (
-        <button
-          className="primary-button wide-button"
-          disabled={checkoutDisabled}
-          onClick={onCheckout}
-        >
+        <Button disabled={checkoutDisabled} fullWidth onClick={onCheckout}>
           Checkout
-        </button>
+        </Button>
       )}
-    </aside>
+    </Panel>
   );
 }

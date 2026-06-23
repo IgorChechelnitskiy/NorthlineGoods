@@ -1,6 +1,10 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
+import { Button } from '../components/Button';
+import { FormField } from '../components/FormField';
+import { FormMessage } from '../components/FormMessage';
+import { Panel } from '../components/Panel';
 
 const roleAccounts = [
   {
@@ -54,39 +58,33 @@ export function LoginPage() {
         </div>
 
         <form className="login-form" onSubmit={submitLogin}>
-          <label>
-            Email
+          <FormField label="Email">
             <input
               required
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
-          </label>
+          </FormField>
 
-          <label>
-            Password
+          <FormField label="Password">
             <input
               required
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-          </label>
+          </FormField>
 
-          {error && <p className="form-message error-message">{error}</p>}
+          {error && <FormMessage variant="error">{error}</FormMessage>}
 
-          <button
-            className="primary-button wide-button"
-            disabled={isSubmitting}
-            type="submit"
-          >
+          <Button disabled={isSubmitting} fullWidth type="submit">
             {isSubmitting ? 'Signing in...' : 'Log in'}
-          </button>
+          </Button>
         </form>
       </section>
 
-      <aside className="role-panel">
+      <Panel className="role-panel">
         <h2>Test roles</h2>
         {roleAccounts.map((account) => (
           <button
@@ -102,7 +100,7 @@ export function LoginPage() {
             <span>{account.email}</span>
           </button>
         ))}
-      </aside>
+      </Panel>
     </main>
   );
 }

@@ -4,6 +4,7 @@ import { useAuth } from '../auth/AuthContext';
 import { useCart } from '../cart/CartContext';
 import northlineLogo from '../assets/northline-logo.png';
 import { formatPrice } from '../lib/format';
+import { Button } from './Button';
 
 export function Header() {
   const navigate = useNavigate();
@@ -159,23 +160,19 @@ export function Header() {
                     </div>
 
                     <div className="mini-cart-actions">
-                      <button
-                        className="secondary-button"
+                      <Button
                         onClick={() => {
                           closeMenus();
                           navigate('/cart');
                         }}
                         type="button"
+                        variant="secondary"
                       >
                         View cart
-                      </button>
-                      <button
-                        className="primary-button"
-                        onClick={goToCheckout}
-                        type="button"
-                      >
+                      </Button>
+                      <Button onClick={goToCheckout} type="button">
                         Checkout
-                      </button>
+                      </Button>
                     </div>
                   </>
                 )}
